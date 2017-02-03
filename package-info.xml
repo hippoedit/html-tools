@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE package-info SYSTEM "http://www.hippoedit.com/xml/package-info">
+<package-info xmlns="http://www.hippoedit.com/xml/package-info" xmlns:smf="http://www.hippoedit.com/">
+	<id>5932BF4C-6AD4-423F-BA59-7DA161C107D6</id>
+	<name>HTML Tools</name>	
+	<version>1.0.2.0</version>
+	<description>HTML Tools for HippoEDIT</description>
+	<author>HippoEDIT.com</author>
+	<email>supportbox@hippoedit.com</email>
+	<homepage>http://wiki.hippoedit.com/plugins/html-tools</homepage>
+	<memo></memo>
+
+	<!-- Common Install actions -->
+	<install>
+		<!-- Read me -->
+		<readme type="inline">This will install HTML Tools for HippoEDIT.</readme>
+
+		<require-file name="html_tools.hejs" destination="%{plugins}%/html_tools.hejs" />
+
+		<!-- Registration -->
+		<install-plugin path="%{plugins}%/html_tools.hejs"/>
+	</install>
+
+	<!-- Uninstall actions -->
+	<uninstall>
+		<!-- Read me -->
+		<readme type="inline">This will uninstall HTML Tools for HippoEDIT.</readme>
+
+		<!-- Un-Registration -->
+		<uninstall-plugin id="5932BF4C-6AD4-423F-BA59-7DA161C107D6"/>
+
+		<!-- Source files -->
+		<remove-file name="%{plugins}%/html_tools.hejs" />
+	</uninstall>
+
+</package-info>

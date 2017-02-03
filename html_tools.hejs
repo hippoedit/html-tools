@@ -1,0 +1,575 @@
+#include "he_utils.js" // generic helper functions
+
+//////////////////////////////////////////////////////////////////////////
+// ICON DEFINITIONS
+//${ region Icons }
+
+// Icons by Yusuke Kamiyamane http://p.yusukekamiyamane.com/
+// http://www.iconfinder.com/search/57/?q=iconset%3Afugue
+
+var nIconLink = Application.RegisterImageString(
+'R0lGODlhEAAQAMQAABmdKb+/v4+Pjnd3d0euVt7e3kHnUqWlpTOHN8XF0hrfK3p6euXl5ampsWGp \
+ alXrZpmZmS6sPNbW1TOjPma7boODhCiwPMzMzO3t7TOcPbW1tSziPWTudZSUlFajX////yH5BAEH \
+ AB8ALAAAAAAQABAAAAV44CeOZGmeaKqqReC6RfsGxVdoV8EU13Hku4vmdoEsBhWIElIZLCDCg0Tw \
+ GQQkGAxv8BFIfIFDpzkolyudQzhQaSQkiUalnaBYCJUA5kBG+poAHAAHGB8Mh4iHHhERD4wOKREG \
+ k5MRKRQTExuZFCsZChkrIg4IkB8hADs='
+);
+
+var nIconAlignLeft = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAAC8vL+fn50pKSlJSUnV1dUNDQzs7O////yH5BAEHAAcALAAAAAAQABAAAAMt \
+ eLrc/o6MSYUVBOpFxxVbyH1CYRaGIULXia6hm6ZADcDRbNRD4AeMn3CIKy4SADs='
+);
+
+var nIconAlignCenter = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAACcnJ+bm5kpKSlNTU0NDQ3V1dTk5Of///yH5BAEHAAcALAAAAAAQABAAAAMx \
+ eLrc/q6MSYUVBeo2ryVbeAyeQJyEYYibiaorC6EpbAC47ATBAOMAAo/BKxqLuuQiAQA7'
+);
+
+var nIconAlignRight = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAACcnJ+jo6EpKSkNDQ1NTUzs7O25ubv///yH5BAEHAAcALAAAAAAQABAAAAMv \
+ eLrc/s6QSYUVBup37fjbRnTC9xVFqB4m6q6PObgoYMNPoBOF7Q8Bhm5IHOKOigQAOw=='
+);
+
+var nIconAlignJustify = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAACcnJ+bm5kpKSkNDQ1JSUjs7O3V1df///yH5BAEHAAcALAAAAAAQABAAAAMv \
+ eLrc/s6QSYUVBupFybVDuG3eF4ZFMWrXOaTwCrlwCtzyY9TF7Q+MgHBIFOaOjQQAOw=='
+);
+
+var nIconBold = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAACcnJ8zMzKCgoFFRUebm5js7O7e3t////yH5BAEHAAcALAAAAAAQABAAAAM2 \
+ eLrc/jDKecK4eBBobjjCIEDW8IXjU2afWhRGIBQD+X7B/Rg6X2wNA2BIBAiADIJyyaQ4n5QEADs='
+);
+
+var nIconItalic = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAACQkJNLS0pmZmVRUVEVFRebm5sLCwv///yH5BAEHAAcALAAAAAAQABAAAAMm \
+eLrc/jDKycK4I0w76AmERgmdRwgeKE4DsEIGIANGIRV47u38lAAAOw=='
+);
+
+var nIconStrike = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAACcnJ+Hh4W9vb1RUVKmpqURERO3t7f///yH5BAEHAAcALAAAAAAQABAAAAM0 \
+ eLrc/jBCMqoYIQ5hzJWCoBiE5HFSoa6sFIRZRMSVBHDGUEQBUABAggFiCBiPQ4lyyWwkAAA7'
+);
+
+var nIconUnderline = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAABsbG8zMzKmpqU5OTj09PeXl5b29vf///yH5BAEHAAcALAAAAAAQABAAAAM2 \
+ eLrc/jA6MWoIdYRnhlHY92CbokHkco7r0TYBUR4yVBACSBSRQPw4iZABKBqLPEdhyWQOn5IEADs='
+);
+
+var nIconCode = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAAERERMzMzKOjo2ZmZufn51dXV3Nzc////yH5BAEHAAcALAAAAAAQABAAAAM1 \
+ eLrc/jBCMdQQkRJF7tNMhzFgIy4BEEDpqgjFZhbjAssc/QEyAdQmA0ABMOBMhF5Swmw6HQkAOw=='
+);
+
+var nIconColor = Application.RegisterImageString(
+'R0lGODlhEAAQALMAAB4eHpmZmf9JfN7e3l5eXsHBwU1NTf9ajf+Msjs7O2lpaf9mmXZ2dv9SheXl \
+ 5f///yH5BAEHAA8ALAAAAAAQABAAAARF8MlJq704a6X0HIoxeE8QGAFJDAzhDUQRJGM2J3iaiRJj \
+ 7ACDowAIYhzIJJKEQSyeh+ihQRVYBc+sdFq9CpxQKbXhXUQAADs='
+);
+
+var nIconParagraph = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAADMzM8zMzHZ2dlJSUrW1tUtLS+Xl5f///yH5BAEHAAcALAAAAAAQABAAAAM2 \
+ eLrc/jA+I4a1BFYbRoZDIR5FEAliQZoQNZbSEaiwFAAHwEZ3vkM9ncRAABgAn5ZhuYw5n4cEADs='
+);
+
+var nIconHeader = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAACUlJczMzLi4uExMTNTU1Ds7O+bm5v///yH5BAEHAAcALAAAAAAQABAAAAM1 \
+ eLrc/jDKeci4xOInhlDd91iEQkLBpQ4BWghBIBTtE9DKXTuz2HOAoEAQBIgYhqRySWk6KQkAOw=='
+);
+
+var nIconLanguage = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAADMzM8zMzIiIiFBQULCwsOXl5UFBQf///yH5BAEHAAcALAAAAAAQABAAAANh \
+ eLrcSoWRoQZhI5/MOz0FIRRBIAzlIJRO4HFBJVxuUJwkqpwGafzAX2wRIZUEhpJNciAEg5eH4aAM \
+ GFDKhQbA7XofAMEiEJ4MFQZAxAToFdIrRbtQ4CbpVi6Rzu/THYANCQA7'
+);
+
+var nIconList = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAACYmJqKiolNTU+Xl5Xd3d0dHRzo6Ov///yH5BAEHAAcALAAAAAAQABAAAAM3 \
+ eLrcGiK4KYhQImtRyItTKI5kUEjk0RVK4b5G/Bhoat9MQNuAAByDmBBALAwOBIBnwGw6j7hoAgA7'
+);
+
+var nIconOrderedList = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAADMzM729vXZ2dk5OTu/v7+Xl5UNDQ////yH5BAEHAAcALAAAAAAQABAAAAM8 \
+ eLrcKoO4eaIaOGOxLGUQ942fYIjkEQzXYLwwoARCkR6mEdw8PsiplY1gABiPAINEZTgQCtBoVPJD \
+ 9UYJADs='
+);
+
+var nIconQuotation = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAAC0tLefn54SEhERERGNjY5+fnzk5Of///yH5BAEHAAcALAAAAAAQABAAAAMp \
+ eLrc/jDKSV0Y5dwMBVGehCljZBjf+UFAe7RAJABCMNdQoO965f9ASQIAOw=='
+);
+
+var nIconFontSize = Application.RegisterImageString(
+'R0lGODlhEAAQALMAAB4eHszMzG9vb1FRUZycnEFBQYKCguXl5Ts7O97e3qWlpV5eXpKSkri4uExM \
+ TP///yH5BAEHAA8ALAAAAAAQABAAAARB8MlJq7046z2F4E8iDMkUDIFFKA4xOYtjLYmxbMkSEEX5 \
+ FItChYEoIhiSACJFcfgEMswAMDg0AFTMYcvdgr5gTgQAOw=='
+);
+
+var nIconSpace = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAADMzM9PT0319fczMzFJSUu7u7ubm5v///yH5BAEHAAcALAAAAAAQABAAAAMd \
+ eLrc/jDKSau9uIqggpAEdwQECJwAUURG665ZjCUAOw=='
+);
+
+var nIconSymbol = Application.RegisterImageString(
+'R0lGODlhEAAQAKIAACYmJszMzIqKilxcXOXl5Z+fnzo6Ov///yH5BAEHAAcALAAAAAAQABAAAAMz \
+ eLrc/jBKQuQhYugh6ssewUHjkpECcz6BESjtC7WKGxX04RaQAQCKn8HToBiPlqRyeUgAADs='
+);
+
+var nIconImage = Application.RegisterImageString(
+'R0lGODlhEAAQAMQAABtYTEWT/66/v+Xl5TptoLrX/yKvQZCiojBsdJG//yCbMEHnUnqy/////8zd \
+ 3ViLvEynX9Xn/3mtwzmNSsXW1kmJazqYQuz39yHQN1jha6fM/5/Cv77Pz2aZzE+Jk////yH5BAEH \
+ AB8ALAAAAAAQABAAAAWE4CeOZGme5OCsbNuqTSzPs0M1Qa7rjKY1lBtjmCAWNZEI8CbRFJ6RJ1RJ \
+ 4VwqlU1ym7x4OVYAYHLYUBwR76Vx4QguYgAC4alLDIbMRfAm+B8PHRIJCXkGe31/gB0QCgoZeBAb \
+ apQXBguYmAoCB52enROOGI4QHwOnqKkKowMoJBATpR8hADs='
+);
+
+var nIconTable = Application.RegisterImageString(
+'R0lGODlhEAAQAMQAAB2IKeXl5bLDwyau8I6goIDN6T+TUPX5+XK+30HnUszd3S6vP0TM/4Xr/Kax \
+ seT09MXW1hrfK2GiZS6hO1XrZr3Ozja++DC5Qv///3rg8e74+GLN9E6zX165bC6CMv///yH5BAEH \
+ AB8ALAAAAAAQABAAAAWQYKCMZFmKWKquqwJhTMxYtDXcAwa9TNM3QEtmmNvBGJuCsoBoNnWQQ69w \
+ qB6i1cpVGyu4doqKWCvWTK1Xa0VT7n5343VFYG4UNHgNRNO5cDQCAg9uO4ULFAsPgYN2eRocC4cT \
+ CxwOgwxehRMJnJwTDhoPoqMPHRMTEacGDgStrq8AEQAEDh8Bt7i5Eh4SAR8hADs='
+);
+
+var nIconW3C = Application.RegisterImageString(
+'R0lGODlhEAAQAMQAAC+dO9bn516Qw0l1qR3HLrbHx5anp6S1tU5PT/H3903VXpGcnGOlc36hyMHJ \
+ yXyNjUrPWpnVn+Pv7y+xQP///6jatK2+vqmvr8Tmy6nB3DHFQl/ab5e41pzOpczY2P///yH5BAEH \
+ AB8ALAAAAAAQABAAAAWeoPBxn5AI5IVcieOV50lRQoDMc/FlDZ+dGcqNkkjoAgPJIDAbeBaIRVH3 \
+ qUooSg6xOK1WC7gZZgMJGL0fSxgz2WwiCQtaLW5vJpW4FcLAJNgKCngSEnIfERCCEROMg4QHVRgA \
+ GhoAEwQAFYQBEpBVFQAEopkSAaadaA+hpKUWrgZoBqCapgEHCQsOXhJSRYSPC54fEk8PxsfGFw4B \
+ HyEAOw=='
+);
+
+//${ endregion }
+//////////////////////////////////////////////////////////////////////////
+
+function mul(str, num) {
+	return num ? Array(num + 1).join(str) : "";
+}
+
+if (!String.prototype.trim) {
+  (function() {
+    // Вырезаем BOM и неразрывный пробел
+    String.prototype.trim = function() {
+      return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+    };
+  })();
+}
+
+Application.AddScriptInfo("5932BF4C-6AD4-423F-BA59-7DA161C107D6", "HTML Tools", "1.0.2.0", "HTML Tools for HippoEDIT", "HippoEDIT", "supportbox@hippoedit.com", "http://wiki.hippoedit.com/plugins/html-tools");
+
+var vInsertLinkCMD = new Command("HTML.Link", "Insert Link...", "Interactively insert link element into HTML code", nIconLink);
+
+// define execute handler for command
+vInsertLinkCMD.onExecute = function() {
+	var dialog_template = 
+	'@<dialog title="Insert Link" resizing="horizontal" modal="false" id="insert_link"> \
+	   <image> \
+		R0lGODlhMAAwALMAALm5ub29veXl5czMzO7u7tjY2MbGxvb29tzc3P///wAAAAAAAAAAAAAAAAAA \
+		AAAAACH5BAEHAAkALAAAAAAwADAAAAT/MMlJq7046827/1phAEFxgOhFBEDbBkQqJ6trwzNYt0Zx \
+		xznODlCQCH5BzbA4ObpwScvS4nydopPppQoYYCVaDPcbzvha2LLZhR21mJuqN1mFa7jA4OBFEYht \
+		flF7JBM+BlSAX4OHCWcAgUaJX0eMjgF9kl8JCBKWeVyQmp1Pn5k5BHmFpE2mKQcFLCSQngkCBm4t \
+		oSkCsS6Vq1y5QcEAvy8xBDbCOVwDCHO0RgMBAybDNnbRorXYFNqiXHYIwLp03RTAxZrhiDhVV+Yu \
+		dhR5jqkz7ByDAFEHvfMYHM0J4gjgBUcA7slww2gDwnIyfHF4+AUXRFUuLsqgeLBVEn8eJ0Fto9Hr \
+		EaaMI8GUDCQypUps+0y6zFLSo8shKGdK2TdAoc6fQFNEAAA7 \
+	   </image> \
+	   <columnbreak/> \
+	   <group> \
+		   <paragraph text="Path:" minwidth="6" style="required" align="left"/> \
+	   	   <edit id="url" cuebanner="Enter here url (required)" autocomplete="url" minwidth="25" required="true"/> \
+	   	   <file_browser filter="All files (*.*)|*.*|HTML Files (*.html)|*.html||" align="right"/> \
+	   </group> \
+	   <group> \
+		   <paragraph text="Title:" minwidth="6" align="left"/> \
+	   	   <edit id="title" cuebanner="Enter here title" minwidth="25"/> \
+	   </group> \
+	   <group uniform="true" align="right|bottom"> \
+		   <button title="&amp;OK" returnval="ok" default="true"/> \
+		   <button title="&amp;Cancel" returnval="cancel"/> \
+	   </group> \
+	</dialog>@';
+	
+	var varStorage = new Storage();
+
+	var sel = ActiveView.Selection;
+	varStorage.title = ActiveDocument.GetText(sel);
+	if ( dialog(dialog_template, varStorage) == "ok" )
+	{
+		var linkPattern = "<a href=\"" + varStorage.url + "\">" + varStorage.title + "</a>";   
+		ActiveDocument.ReplaceText(sel, linkPattern, 0 /*eActionUnknown*/);	
+	}	
+}
+
+// define enable state handler for command
+vInsertLinkCMD.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+// register the command as global, to be able assign shortcuts to it
+Application.RegisterCommand(vInsertLinkCMD);
+
+/*************************************************
+*  IMAGE command
+*************************************************/
+
+var vInsertImageCMD = new Command("HTML.Image", "Insert image...", "Insert image tag", nIconImage);
+vInsertImageCMD.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveDocument.ReplaceText(sel, "<img src=\"\"/>", AddUndoActionType("Insert image"));
+}
+vInsertImageCMD.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  TABLE command
+*************************************************/
+
+var vInsertTabeCMD = new Command("HTML.Table", "Insert table...", "Insert table tag", nIconTable);
+vInsertTabeCMD.onExecute = function() {
+	var sel = ActiveView.Selection;
+	var lb  = ActiveDocument.LineBreak;
+	var dialog_template = 
+	'@<dialog title="Configure Table" resizing="horizontal" modal="false" id="table"> \
+	   <group> \
+		   <paragraph text="Rows (TR):" minwidth="4" style="required" align="left"/> \
+	   	   <history_edit id="rows" cuebanner="Rows" minwidth="4" required="true"/> \
+	   </group> \
+	   <group> \
+			  <paragraph text="Cells (TD):" minwidth="4" style="required" align="left"/> \
+			  <history_edit id="cells" cuebanner="Cells" minwidth="4" required="true"/> \
+		  </group> \
+	   <group uniform="true" align="right|bottom"> \
+		   <button title="&amp;OK" returnval="ok" default="true"/> \
+		   <button title="&amp;Cancel" returnval="cancel"/> \
+	   </group> \
+	</dialog>@';
+
+	this.rows = 3; 
+	this.cells = 3;
+	if ( dialog(dialog_template, this) == "ok" && parseInt(this.rows) > 0 && parseInt(this.cells) > 0) {
+		ActiveDocument.ReplaceText(sel, "<table>" + lb + mul("\t<tr>" + lb + mul("\t\t<td></td>" + lb, parseInt(this.cells)) + "\t</tr>" + lb, parseInt(this.rows)) + "</table>" + lb, AddUndoActionType("Insert table"));	
+	}
+}
+vInsertTabeCMD.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  HEADER command
+*************************************************/
+
+function getHeaderCommand(level)
+{
+	var vInsertH = new Command("HTML.InsertH" + level, "H" + level, "Surround selection by <h" + level + "> </h" + level + ">", nIconHeader);
+	
+	vInsertH.onExecute = function() {
+		var sel = ActiveView.Selection;
+		ActiveDocument.ReplaceText(sel, "<h" + level + ">" + ActiveDocument.GetText(sel) + "</h" + level + ">", AddUndoActionType("Insert header"));
+		if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top, sel.left + 4);	
+	}
+	
+	vInsertH.onEnabled = function() {
+		return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+	}
+
+	return vInsertH;
+}
+
+var vInsertH1 = getHeaderCommand(1);
+var vInsertH2 = getHeaderCommand(2);
+var vInsertH3 = getHeaderCommand(3);
+var vInsertH4 = getHeaderCommand(4);
+var vInsertH5 = getHeaderCommand(5);
+
+/*************************************************
+*  BLOCKQUOTE command
+*************************************************/
+
+var vBlockquote = new Command("HTML.Blockquote", "Blockquote selection", "Surround selection with <blockquote> </blockquote>", nIconQuotation);
+vBlockquote.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveDocument.ReplaceText(sel, "<blockquote>" + ActiveDocument.GetText(sel) + "</blockquote>", AddUndoActionType("Blockquote selection"));
+	if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top, sel.left + 12);	
+}
+vBlockquote.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  NBSP command
+*************************************************/
+
+var vSpaceCMD = new Command("HTML.Space", "Insert &nbsp;", "Insert &nbsp;", nIconSpace);
+vSpaceCMD.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveDocument.ReplaceText(sel, "&nbsp;", AddUndoActionType("Insert &nbsp;"));
+}
+vSpaceCMD.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  Break command
+*************************************************/
+
+var vBreakCMD = new Command("HTML.Brake", "Insert <br/>", "", nIconParagraph);
+vBreakCMD.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveView.Position = ActiveDocument.ReplaceText(sel, "<br/>", AddUndoActionType("Insert <br/>"));
+}
+vBreakCMD.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  LIST command
+*************************************************/
+
+var vList = new Command("HTML.ListUnordered", "Unordered list", "Surround selection with <ul> </ul>", nIconList);
+vList.onExecute = function() {
+	// in case of selected text, we need to split it in lines, and find out number of items from line numbers
+	// in other case, when noting selected, ask user
+	var sel   = ActiveView.Selection;
+	var lb    = ActiveDocument.LineBreak;
+ 	var text  = "";
+	if (sel.IsEmpty)
+	{
+		text = mul("\t<li></li>" + lb, parseInt(prompt("Enter items Count", "5")));
+	}
+	else
+	{
+		var lines = ax2js(ActiveDocument.GetLines(sel, false));
+		for (var i = 0; i < lines.length; i++) {
+			var line = lines[i].trim();
+			if (line.length)
+				text += "\t<li>" + line + "</li>" + lb;
+		}
+	}
+	ActiveView.Position = ActiveDocument.ReplaceText(sel, "<ul>" + lb + text + "</ul>" + lb, AddUndoActionType("Convert selection to unordered list"));
+	if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top + 1, sel.left + 3 + lb.length);
+}
+vList.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  ORDERED LIST command
+*************************************************/
+
+var vOrderedList = new Command("HTML.ListOrdered", "Ordered list", "Surround selection with <ol> </ol>", nIconOrderedList);
+vOrderedList.onExecute = function() {
+	// in case of selected text, we need to split it in lines, and find out number of items from line numbers
+	// in other case, when noting selected, ask user
+	var sel   = ActiveView.Selection;
+	var lb    = ActiveDocument.LineBreak;
+ 	var text  = "";
+	if (sel.IsEmpty)
+	{
+		text = mul("\t<li></li>" + lb, parseInt(prompt("Enter items Count", "5")));
+	}
+	else
+	{
+		var lines = ax2js(ActiveDocument.GetLines(sel, false));
+		for (var i = 0; i < lines.length; i++) {
+			var line = lines[i].trim();
+			if (line.length)
+				text += "\t<li>" + line + "</li>" + lb;
+		}
+	}
+	ActiveView.Position = ActiveDocument.ReplaceText(sel, "<ol>" + lb + text + "</ol>" + lb, AddUndoActionType("Convert selection to unordered list"));
+	if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top + 1, sel.left + 3 + lb.length);	
+}
+vOrderedList.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  BOLD command
+*************************************************/
+
+var vBold = new Command("HTML.Bold", "Bold selection", "Surround selection with <B> </B>", nIconBold);
+vBold.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveView.Position = ActiveDocument.ReplaceText(sel, "<b>" + ActiveDocument.GetText(sel) + "</b>", AddUndoActionType("Bold selection"));
+	if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top, sel.left + 3);	
+}
+vBold.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  ITALIC command
+*************************************************/
+
+var vItalic = new Command("HTML.Italic", "Italic selection", "Surround selection with <em> </em>", nIconItalic);
+vItalic.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveView.Position = ActiveDocument.ReplaceText(sel, "<em>" + ActiveDocument.GetText(sel) + "</em>", AddUndoActionType("Italic selection"));
+	if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top, sel.left + 4);	
+}
+vItalic.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  UNDERLINE command
+*************************************************/
+
+var vUnderline = new Command("HTML.Underline", "Underline selection", "Surround selection with <u> </u>", nIconUnderline);
+vUnderline.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveView.Position = ActiveDocument.ReplaceText(sel, "<u>" + ActiveDocument.GetText(sel) + "</u>", AddUndoActionType("Underline selection"));
+	if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top, sel.left + 4);	
+}
+vUnderline.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  STRIKETHROUGH command
+*************************************************/
+
+var vStrikethrough = new Command("HTML.Strikethrough", "Strikethrough selection", "Surround selection with <del> </del>", nIconStrike);
+vStrikethrough.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveView.Position = ActiveDocument.ReplaceText(sel, "<del>" + ActiveDocument.GetText(sel) + "</del>", AddUndoActionType("Strikethrough selection"));
+	if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top, sel.left + 5);
+}
+vStrikethrough.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  ALIGN LEFT command
+*************************************************/
+
+var vAlignLeft = new Command("HTML.AlignLeft", "Align selection left", "Surround selection with <p> </p>", nIconAlignLeft);
+vAlignLeft.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveView.Position = ActiveDocument.ReplaceText(sel, "<p style=\"text-align: left;\">" + ActiveDocument.GetText(sel) + "</p>", AddUndoActionType("Align Left"));
+	if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top, sel.left + 29);
+}
+vAlignLeft.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  ALIGN CENTER command
+*************************************************/
+
+var vAlignCenter = new Command("HTML.AlignCenter", "Align selection center", "Surround selection with <p> </p>", nIconAlignCenter);
+vAlignCenter.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveView.Position = ActiveDocument.ReplaceText(sel, "<p style=\"text-align: center;\">" + ActiveDocument.GetText(sel) + "</p>", AddUndoActionType("Align Center"));
+	if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top, sel.left + 31);
+}
+vAlignCenter.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  ALIGN CENTER command
+*************************************************/
+
+var vAlignRight = new Command("HTML.AlignRight", "Align selection right", "Surround selection with <p> </p>", nIconAlignRight);
+vAlignRight.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveView.Position = ActiveDocument.ReplaceText(sel, "<p style=\"text-align: right;\">" + ActiveDocument.GetText(sel) + "</p>", AddUndoActionType("Align Right"));
+	if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top, sel.left + 30);
+}
+vAlignRight.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+/*************************************************
+*  ALIGN JUSTIFY command
+*************************************************/
+
+var vAlignJustify = new Command("HTML.AlignJustify", "Justify selection", "Surround selection with <p> </p>", nIconAlignJustify);
+vAlignJustify.onExecute = function() {
+	var sel = ActiveView.Selection;
+	ActiveView.Position = ActiveDocument.ReplaceText(sel, "<p style=\"text-align: justify;\">" + ActiveDocument.GetText(sel) + "</p>", AddUndoActionType("Justify selection"));
+	if ( sel.IsEmpty ) ActiveView.Position = new Position(sel.top, sel.left + 32);
+}
+vAlignJustify.onEnabled = function() {
+	return ActiveDocument != null && ActiveDocument.ReadOnly != true;
+}
+
+////////////////////////////////////////////////////////////////////////
+// Initialize HTML Toolbar
+Application.onInitToolbars = function (){
+	var MyToolbar = this.GetToolBar("HTML", true);
+ 	MyToolbar.Name = "HTML Tools";
+	MyToolbar.AddButton(vInsertLinkCMD);
+	MyToolbar.AddButton(vInsertImageCMD);
+	MyToolbar.AddButton(vInsertTabeCMD);
+	MyToolbar.AddButton();
+	MyToolbar.AddButton(vSpaceCMD);
+	MyToolbar.AddButton(vBreakCMD);
+	MyToolbar.AddButton(vInsertH1, eToolButtonStyleDropMenu);
+	MyToolbar.AddButton();
+	MyToolbar.AddButton(vList);
+	MyToolbar.AddButton(vOrderedList);
+	MyToolbar.AddButton(vBlockquote);
+	MyToolbar.AddButton();
+	MyToolbar.AddButton(vBold);
+	MyToolbar.AddButton(vItalic);
+	MyToolbar.AddButton(vStrikethrough);
+	MyToolbar.AddButton();
+	MyToolbar.AddButton(vAlignLeft);
+	MyToolbar.AddButton(vAlignCenter);
+	MyToolbar.AddButton(vAlignRight);
+}
+
+////////////////////////////////////////////////////////////////////////
+// Create new main Menu for HTML
+Application.onInitMainMenu = function (bUpdate){
+	if ( bUpdate == false )
+	{
+		var menuHTML = this.InsertSubMenu(this.ItemCount - 4, "HTM&L");
+		if ( menuHTML != null )
+		{
+			menuHTML.AddItem("", vInsertLinkCMD);
+			menuHTML.AddItem("", vInsertImageCMD);
+			menuHTML.AddItem("", vInsertTabeCMD);
+			menuHTML.AddItem("");
+			menuHTML.AddItem("", vSpaceCMD);
+			menuHTML.AddItem("", vBreakCMD);
+			menuHTML.AddItem("");
+			var menuHeader = menuHTML.AddSubMenu("Headers");
+			menuHeader.AddItem("", vInsertH1);
+			menuHeader.AddItem("", vInsertH2);
+			menuHeader.AddItem("", vInsertH3);
+			menuHeader.AddItem("", vInsertH4);
+			menuHeader.AddItem("", vInsertH5);
+			menuHTML.AddItem("");
+			menuHTML.AddItem("", vList);
+			menuHTML.AddItem("", vOrderedList);
+			menuHTML.AddItem("", vBlockquote);
+			menuHTML.AddItem("");
+			menuHTML.AddItem("", vBold);
+			menuHTML.AddItem("", vItalic);
+			menuHTML.AddItem("", vUnderline);
+			menuHTML.AddItem("", vStrikethrough);
+			menuHTML.AddItem("");
+			var menuAlign = menuHTML.AddSubMenu("Align");
+			menuAlign.AddItem("Left", vAlignLeft);
+			menuAlign.AddItem("Center", vAlignCenter);
+			menuAlign.AddItem("Right", vAlignRight);
+			menuAlign.AddItem("Justify", vAlignJustify);
+		}
+	}
+} 
+
+////////////////////////////////////////////////////////////////////////
+// UI Events handlers
+Application.onMenuCreate = function (command) {
+	if ( command == "HTML.InsertH1" )
+	{
+		this.AddItem("", vInsertH1);
+		this.AddItem("", vInsertH2);
+		this.AddItem("", vInsertH3);
+		this.AddItem("", vInsertH4);
+		this.AddItem("", vInsertH5);
+	}
+}
